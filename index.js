@@ -49,14 +49,18 @@ function arithmetic(operator, num1, num2) {
     }
 }
 
+/* Function check in a list who are the numbers and it convert it into a string */
+
 function convertStringToNumberInList(arithmeticString) {
     var arithmeticArray = arithmeticString.split(" ");
 
     for(var i=0; i < arithmeticArray.length; i++)
-        if(parseInt(arithmeticArray[i])) arithmeticArray[i] = parseInt(arithmeticArray[i]);
+        if(parseFloat(arithmeticArray[i])) arithmeticArray[i] = parseFloat(arithmeticArray[i]);
 
     return arithmeticArray;
 }
+
+/* Function apply the arithmetic rules  */
 
 function applyingMDAS(arr) {
     let multiplyDivisionOperator = "*/";
