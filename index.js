@@ -4,28 +4,81 @@ let resetButton = document.getElementById('ac');
 let equalButton = document.getElementById('result');
 let screen = document.querySelector('span');
 let decimal = false;
+let operator = "+-*/";
+
+
 
 button.forEach(btn => {
     btn.addEventListener('click', () => {
-        let operator = '+-*/';
 
         if(screen.innerHTML.charAt(0) === "0") { screen.innerHTML = btn.value; return; };
-
-        if(btn.value === '.' && screen.innerHTML.includes('.')) decimal = true;
-        console.log(decimal)
-        if(operator.includes(btn.value)) decimal = false;
-        console.log(decimal)
-        
-        if(decimal) {
+        if(operator.includes(btn.value) && btn.value !== "=") 
+            screen.innerHTML += ` ${btn.value} `;
+        else if(btn.value !== "=")
             screen.innerHTML += btn.value;
-        } else if(btn.value !== "=") {
-            decimal = false;
-            screen.innerHTML += btn.value;
-        }
 
     })
 });
 
-equalButton.addEventListener('click', () => screen.innerHTML = eval(screen.innerHTML));
+equalButton.addEventListener('click', () =>  {
+    var arrayResult = convertStringToNumberInList(screen.innerHTML);
+    screen.innerHTML = applyingMDAS(arrayResult);
+
+});
 
 resetButton.addEventListener('click', () => screen.innerHTML = "0");
+
+
+// Functions to apply MDAS (multiply, divide, add, substract)
+
+
+/* Arithmetic Function */
+
+function arithmetic(operator, num1, num2) {
+    switch(operator) {
+        case "*":
+            return num1 * num2; 
+        case "/":
+            return num1 / num2; 
+        case "+":
+            return num1 + num2; 
+        case "-":
+            return num1 - num2; 
+        default:
+            return 0;
+    }
+}
+
+function convertStringToNumberInList(arithmeticString) {
+    var arithmeticArray = arithmeticString.split(" ");
+
+    for(var i=0; i < arithmeticArray.length; i++)
+        if(parseInt(arithmeticArray[i])) arithmeticArray[i] = parseInt(arithmeticArray[i]);
+
+    return arithmeticArray;
+}
+
+function applyingMDAS(arr) {
+    let multiplyDivisionOperator = "*/";
+    let addSubstractOperator = "+-";
+    let result = "";
+  
+  do {
+    for(var i=0; i < arr.length; i++)
+        if(multiplyDivisionOperator.includes(arr[i])) {
+            arr[i-1] = arithmetic(arr[i], arr[i-1], arr[i+1]);
+          	arr.splice(i, 2);
+        }
+    
+    for(var i=0; i < arr.length; i++)
+        if(addSubstractOperator.includes(arr[i])) {
+            arr[i-1] = arithmetic(arr[i], arr[i-1], arr[i+1]);
+          	arr.splice(i, 2);
+        }
+  }	
+  while(arr.length !== 1)
+  
+  result = arr[0].toString();
+
+  return result;
+}
