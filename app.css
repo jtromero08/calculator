@@ -16,17 +16,12 @@ button {
     border: none;
 }
 
-.operator > button {
-    background: rgb(36, 35, 33);
-    color: rgb(35, 104, 233);
-    font-weight: bolder;
-}
-
 .container {
     display: flex;
     justify-content: center;
     margin: 65px auto 93px;
 }
+
 .calculator{
     display: grid;
     justify-content: center;
@@ -35,14 +30,6 @@ button {
     width: 340px;
     padding: 16px 12px 30px 22px;
     border-radius: 5px;
-}
-
-.equal-button > button {
-    height: 67px;
-    width: 349px;
-    background: #e69501;
-    font-size: large;
-    font-weight: bolder;
 }
 
 .screen-output {
@@ -67,6 +54,17 @@ button {
     left: -4px;
 }
 
+.numbers > button {
+  background: white;
+  color: rgba(0,124,106,1);
+}
+
+.numbers > button:hover {
+  background: rgba(0,124,106,1);
+  color: white;
+  transition: 0.3s;
+}
+
 .operator {
     height: 400px;
     width: 10em;
@@ -75,9 +73,34 @@ button {
     bottom: 24.8em;
 }
 
+.operator > button {
+    background: rgb(36, 35, 33);
+    color: rgb(35, 104, 233);
+    font-weight: bolder;
+}
+
+.operator > button:hover {
+  background: rgb(35, 104, 233);
+  color: rgb(36, 35, 33);
+  transition: 0.3s
+}
+
 .equal-button {
     position: relative;
     left: -4px;
     bottom: 29em;
 }
 
+.equal-button > button {
+    height: 67px;
+    width: 349px;
+    background: #e69501;
+    font-size: large;
+    font-weight: bolder;
+}
+
+.equal-button > button:hover {
+  background: black;
+  color: #e69501;
+  transition: 0.3s
+}
